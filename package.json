@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "This is Namaste React by Chandra Shekar",
   "scripts": {
+    "start": "parcel index.html",
     "test": "jest"
   },
   "repository": {
