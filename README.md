@@ -49,3 +49,9 @@ import Component from "Path";
 
 export const Component;
 import {Component} from "path";
+
+# React Hooks
+
+(Normal JS Utility functions)
+-useState()- Super Poweful Variable
+-useEffect()

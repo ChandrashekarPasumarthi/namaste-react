@@ -1,14 +1,28 @@
 import RestaurentCard from "./RestaurentCard";
-import resList from "../utils/mockData";
+import { useState } from "react";
+import resList from '../utils/mockData'
 
-//not using keys( not acceptable) <<<< index as key <<<< unique id (best practice)
-const Body = () => {
+const Body = () => { 
+	// State Variable - Super Powerful variable
+	const[listOfRestaurents, setListofRestaurents] = useState(resList);
   return (
     <div className="body">
-      <div className="search"> Search</div>
+      <div className="filter"> 
+	  <button 
+	  className="filter-btn" 
+	  onClick={() => {
+		//Filter Logic here
+		const filteredList = listOfRestaurents.filter(
+			(res) => res.data.avgRating > 4
+		);
+		setListofRestaurents(filteredList);
+		}}>
+		Top Rated Restaurents
+		</button>
+	  </div>
       <div className="res-container">
        {
-        resList.map( (restaurent) => (
+        listOfRestaurents.map( (restaurent) => (
           <RestaurentCard key={restaurent.data.id} resData = {restaurent} />
         ))
        }
