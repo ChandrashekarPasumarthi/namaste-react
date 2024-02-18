@@ -55,3 +55,8 @@ import {Component} from "path";
 (Normal JS Utility functions)
 -useState()- Super Poweful Variable
 -useEffect()
+
+# Disable CORS
+
+use this command on windows Ops
+"C:\Program Files\Google\Chrome\Application\chrome.exe" --disable-web-security --user-data-dir="C:/chrome_dev"
