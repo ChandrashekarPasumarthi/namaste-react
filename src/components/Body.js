@@ -6,7 +6,11 @@ import Shimmer from "./Shimmer";
 const Body = () => { 
 	// Local State Variable - Super Powerful variable
 	const[listOfRestaurents, setListofRestaurents] = useState([]);
+	const[searchText, setSearchText] = useState("");
+	const[filteredRestaurent, setFilteredRestaurent] = useState([]);
 
+	console.log("Body Rendered");
+	//Whenever state variable update, react triggers a reconcilation cycle(re-renders the component);
 	useEffect( ()=>{
 		fetchData() 
 	}, []);
@@ -20,16 +24,31 @@ const Body = () => {
 		
 		//Optional Chaining
 		setListofRestaurents(json?.data?.cards[4].card?.card?.gridElements?.infoWithStyle?.restaurants);
+		setFilteredRestaurent(json?.data?.cards[4].card?.card?.gridElements?.infoWithStyle?.restaurants);
 	}
   return listOfRestaurents.length === 0 ? <Shimmer/> :(
     <div className="body">
       <div className="filter"> 
-	  <button 
+	  <div className="search">
+		<input type="text" className="search-box" value={searchText} onChange={(e) =>{
+			setSearchText(e.target.value);
+		} }/>
+		<button onClick={ ()=>{
+			//Filter the restraurent cards and update the UI using state
+			//searchText
+			console.log(searchText);
+			const filteredRestaurent = listOfRestaurents.filter(
+				(res) => res.info.name.toLocaleLowerCase().includes(searchText.toLowerCase())
+			);
+			setFilteredRestaurent(filteredRestaurent);
+		}}>Search</button> 
+	  </div>
+	  <button
 	  className="filter-btn" 
 	  onClick={() => {
 		//Filter Logic here
 		const filteredList = listOfRestaurents.filter(
-			(res) => res.info.avgRating > 4
+			(res) => res.info.avgRating > 4.5
 		);
 		setListofRestaurents(filteredList);
 		}}>
@@ -38,7 +57,7 @@ const Body = () => {
 	  </div>
       <div className="res-container">
        {
-        listOfRestaurents.map( (restaurent) => (
+        filteredRestaurent.map( (restaurent) => (
           <RestaurentCard key={restaurent.info.id} resData = {restaurent} />
         ))
        }
