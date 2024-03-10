@@ -60,3 +60,7 @@ import {Component} from "path";
 
 use this command on windows Ops
 "C:\Program Files\Google\Chrome\Application\chrome.exe" --disable-web-security --user-data-dir="C:/chrome_dev"
+
+# 2 types of Routing in web aoos
+-Client Side Routing : You're not making any network call, because all the components are available.
+-Server side Routing : You make a network call, and the page is coming from Server
